@@ -3,21 +3,27 @@
 use Illuminate\Foundation\Application;
 use Illuminate\Support\Facades\Route;
 use Inertia\Inertia;
-use Codexshaper\WooCommerce\Facades\Order;
-use Illuminate\Support\Facades\Log;
+// use Codexshaper\WooCommerce\Facades\Order;
 use App\Http\Controllers\WooCommerceController;
+use App\Models\Worder;
 
-Route::get('/', function () {
-    // $orders = Order::all();
-    Log::info('WooCommerce webhook received:');
-    // return dd($orders);
-    return Inertia::render('Welcome', [
-        'canLogin' => Route::has('login'),
-        'canRegister' => Route::has('register'),
-        'laravelVersion' => Application::VERSION,
-        'phpVersion' => PHP_VERSION,
-    ]);
-});
+
+// Route::get('/', function () {
+//     // $orders = Order::all();
+//     // return dd($orders);
+//     $posts= Worder::all();
+//     return dd($posts);
+
+//     return Inertia::render('Welcome', [
+//         'canLogin' => Route::has('login'),
+//         'canRegister' => Route::has('register'),
+//         'laravelVersion' => Application::VERSION,
+//         'phpVersion' => PHP_VERSION,
+//     ]);
+
+// });
+
+Route::get('/', [WooCommerceController::class, 'order'])->name('new.order');
 
 Route::middleware([
     'auth:sanctum',
